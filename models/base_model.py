@@ -12,4 +12,4 @@ class BaseModel:
     updated_at = datetime.now()
 
     def __str__(self):
-        
+        return pass 
