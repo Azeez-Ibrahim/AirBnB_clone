@@ -13,4 +13,8 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         
     def __str__(self):
-        return pass 
+        return pass
+    def save(self):
+        updated_at = datetime.now()
+    def to_dict(self):
+        return self.__dict__
