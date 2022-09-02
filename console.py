@@ -1,34 +1,36 @@
 #!/usr/bin/python3
 
-'''AirBnB Console (Single use, or customize shell)'''
+"""AirBnB Console (Single use, or customize shell)"""
 import cmd
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.amenity import Amenity
-from models.city import City
-from models.review import Review
-from models.place import Place
-from models import storage
+
+# from models.base_model import BaseModel
+# from models.user import User
+# from models.state import State
+# from models.amenity import Amenity
+# from models.city import City
+# from models.review import Review
+# from models.place import Place
+# from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-    '''This is overall class for HBNBCommand'''
-    prompt = '(hbnb) '
-    classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
-    'State': State, 'City': City, 'Amenity': Amenity, 'Review': Review}	
+    """This is overall class for HBNBCommand"""
+
+    prompt = "(hbnb) "
+    # classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
+    #'State': State, 'City': City, 'Amenity': Amenity, 'Review': Review}
 
     def do_quit(self, args):
-        '''This is quit method for exiting the program'''
+        """This is quit method for exiting the program"""
         exit()
 
     def do_EOF(self, args):
-        '''This is exit method for End of file (EOF)'''
-        print('')
+        """This is exit method for End of file (EOF)"""
+        print("")
         exit()
 
     def do_create(self, args):
-        'create instance of basemodel, saves it'
+        "create instance of basemodel, saves it"
         args = args.split()
         if args is None:
             print("** class name missing **")
@@ -40,9 +42,9 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, args):
-        'print string __str__ of an instance based on class name'
+        "print string __str__ of an instance based on class name"
         args = args.split()
-        'expecting: args = [name, name_id]'
+        "expecting: args = [name, name_id]"
         if len(args) != 2:
             print("** instance id missing **")
         elif args[0] not in classes:
@@ -55,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, args):
-        'deletes an instance based on class name or id'
+        "deletes an instance based on class name or id"
         args = args.split()
         if not args:
             print("** class name missing **")
@@ -74,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_all(self, args):
-        'print string __str__ of an instance based on class name or nothing'
+        "print string __str__ of an instance based on class name or nothing"
         args = args.split()
         if not args:
             for k, v in storage.all().items():
@@ -86,10 +88,10 @@ class HBNBCommand(cmd.Cmd):
                 if args[0] == v.__class__.__name__:
                     print(v)
                     return
-            print('[]')
+            print("[]")
 
     def do_update(self, args):
-        'updates an instance attribute based on class name and id'
+        "updates an instance attribute based on class name and id"
         args = args.split()
         if not args:
             print("** class name missing **")
@@ -119,11 +121,10 @@ class HBNBCommand(cmd.Cmd):
                 return
             print("** no instance found **")
 
-
     def emptyline(self):
-        '''This is a method to pass when empty line is entered'''
-        pass    
+        """This is a method to pass when empty line is entered"""
+        pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
