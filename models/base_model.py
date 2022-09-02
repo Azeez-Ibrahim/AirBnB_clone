@@ -7,6 +7,7 @@ from datetime import datetime
 import uuid
 import storage
 
+
 class BaseModel:
     """BaseModel class"""
 
@@ -24,12 +25,12 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        return "[{}] ({}) {}".\
-            format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         self.updated_at = datetime.now()
         storage.save()
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict["__class__"] = type(self).__name__
