@@ -26,4 +26,4 @@ class FileStorage:
             from models.base_model import BaseModel
             for k, v in dict_obj.items():
                 if v["__class__"] == "BaseModel":
-                    FileStorage.__objects[k] = BaseModel(**value)
+                    FileStorage.__objects[k] = BaseModel(**v)
