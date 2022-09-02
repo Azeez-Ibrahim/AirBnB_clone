@@ -6,7 +6,9 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     '''This is overall class for HBNBCommand'''
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
+    classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
+    'State': State, 'City': City, 'Amenity': Amenity, 'Review': Review}	
 
     def do_quit(self, line):
         '''This is quit method for exiting the program'''
@@ -17,9 +19,20 @@ class HBNBCommand(cmd.Cmd):
         print('')
         exit()
 
+    def do_create(self, args):
+        'create instance of basemodel, saves it'
+        args = args.split()
+        if args is None:
+            print("** class name missing **")
+        elif args[0] not in classes:
+            print("** class doesn't exist **")
+        else:
+            new_instance = classes.get(args[0])()
+            print(new_instance.id)
+
     def emptyline(self):
         '''This is a method to pass when empty line is entered'''
-        pass
+        pass    
 
 
 if __name__ == '__main__':
