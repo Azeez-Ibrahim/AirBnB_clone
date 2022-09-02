@@ -37,6 +37,23 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_instance = classes.get(args[0])()
             print(new_instance.id)
+            storage.save()
+
+    def do_show(self, args):
+        'print string __str__ of an instance based on class name'
+        args = args.split()
+        'expecting: args = [name, name_id]'
+        if len(args) != 2:
+            print("** instance id missing **")
+        elif args[0] not in classes:
+            print("** class doesn't exist **")
+        else:
+            for k, v in storage.all().items():
+                if args[1] == v.id:
+                    print(v)
+                    return
+            print("** no instance found **")
+
 
     def emptyline(self):
         '''This is a method to pass when empty line is entered'''
