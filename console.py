@@ -18,11 +18,11 @@ class HBNBCommand(cmd.Cmd):
     classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
     'State': State, 'City': City, 'Amenity': Amenity, 'Review': Review}	
 
-    def do_quit(self, line):
+    def do_quit(self, args):
         '''This is quit method for exiting the program'''
         exit()
 
-    def do_EOF(self, line):
+    def do_EOF(self, args):
         '''This is exit method for End of file (EOF)'''
         print('')
         exit()
@@ -53,6 +53,21 @@ class HBNBCommand(cmd.Cmd):
                     print(v)
                     return
             print("** no instance found **")
+
+    def do_all(self, args):
+        'print string __str__ of an instance based on class name or nothing'
+        args = args.split()
+        if not args:
+            for k, v in storage.all().items():
+                print(v)
+        elif args[0] not in classes:
+            print("** class doesn't exist **")
+        else:
+            for k, v in storage.all().items():
+                if args[0] == v.__class__.__name__:
+                    print(v)
+                    return
+            print('[]')
 
 
     def emptyline(self):
