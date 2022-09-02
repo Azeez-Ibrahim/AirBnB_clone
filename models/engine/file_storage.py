@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Storage module """
 import json
-
+import os
 
 class FileStorage:
     __file_path = "file.json"
