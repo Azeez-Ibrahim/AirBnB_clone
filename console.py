@@ -12,7 +12,6 @@ from models.review import Review
 from models.place import Place
 from models import storage
 
-
 class HBNBCommand(cmd.Cmd):
     """This is overall class for HBNBCommand"""
 
@@ -40,10 +39,10 @@ class HBNBCommand(cmd.Cmd):
         args = args.split()
         if args is None:
             print("** class name missing **")
-        elif args[0] not in classes:
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
-            new_instance = classes.get(args[0])()
+            new_instance = self.classes.get(args[0])()
             print(new_instance.id)
             storage.save()
 
@@ -53,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         "expecting: args = [name, name_id]"
         if len(args) != 2:
             print("** instance id missing **")
-        elif args[0] not in classes:
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
             for k, v in storage.all().items():
@@ -71,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 2:
             print("** instance id missing **")
             return
-        if args[0] not in classes:
+        if args[0] not in self.classes:
             print("** class doesn't exist **")
             return
         for k, v in storage.all().items():
@@ -87,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             for k, v in storage.all().items():
                 print(v)
-        elif args[0] not in classes:
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
             for k, v in storage.all().items():
@@ -112,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
-        if args[0] not in classes:
+        if args[0] not in self.classes:
             print("** class doesn't exist **")
             return
         for k, v in storage.all().items():
@@ -120,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
                 args[3] = args[3].strip('"')
                 try:
                     args[3] = int(args[3])
-                except:
+                except ValueError:
                     pass
                 setattr(v, args[2], args[3])
                 storage.save()
