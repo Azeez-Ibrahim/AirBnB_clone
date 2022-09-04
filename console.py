@@ -84,18 +84,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         "print string __str__ of an instance based on class name or nothing"
-        args = args.split()
-        if not args:
-            for k, v in storage.all().items():
-                print(v)
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
+        if args != "":
+            args = args.split()
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                list_str = [str(v) for k, v in storage.all().items()
+                     if type(v).__name__ == args[0]]
+                print(list_str)
         else:
-            for k, v in storage.all().items():
-                if args[0] == v.__class__.__name__:
-                    print(v)
-                    return
-            print("[]")
+            list_str = [str(v) for k, v in storage.all().items()]
+            print(list_str)
 
     def do_update(self, args):
         "updates an instance attribute based on class name and id"
