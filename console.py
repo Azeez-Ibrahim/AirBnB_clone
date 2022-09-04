@@ -12,18 +12,20 @@ from models.review import Review
 from models.place import Place
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """This is overall class for HBNBCommand"""
 
     prompt = "(hbnb) "
-    classes = {'BaseModel': BaseModel,
-                'User': User,
-                'Place': Place,
-                'State': State,
-                'City': City,
-                'Amenity': Amenity,
-                'Review': Review
-               }
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review,
+    }
 
     def do_quit(self, args):
         """This is quit method for exiting the program"""

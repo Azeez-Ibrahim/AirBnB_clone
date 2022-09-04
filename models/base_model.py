@@ -31,20 +31,19 @@ class BaseModel:
 
     def __str__(self):
         """Return a human-readable
-           string representation of an instance
+        string representation of an instance
         """
         return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Update the updated_at attribute
-           with the current datetme
+        with the current datetme
         """
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """Returns a dictionary representation of an instance
-        """
+        """Returns a dictionary representation of an instance"""
         class_dict = self.__dict__.copy()
         class_dict["__class__"] = type(self).__name__
         class_dict["created_at"] = class_dict["created_at"].isoformat()
