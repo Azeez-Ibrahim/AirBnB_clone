@@ -18,7 +18,7 @@ class FileStorage:
 
     def new(self, obj):
         """Sets new obj in __objects dictionary"""
-        key = "{}.{}".format(type(obj).__name__, id(obj))
+        key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
