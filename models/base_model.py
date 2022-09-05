@@ -33,8 +33,7 @@ class BaseModel:
         """Return a human-readable
         string representation of an instance
         """
-        return "[{}] ({}) {}".\
-               format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Update the updated_at attribute

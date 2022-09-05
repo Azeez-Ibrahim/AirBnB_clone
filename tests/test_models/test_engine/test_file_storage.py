@@ -219,8 +219,7 @@ class TestFileStorage(unittest.TestCase):
         storage.save()
         self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
         d = {key: o.to_dict()}
-        with open(FileStorage._FileStorage__file_path,
-                  "r", encoding="utf-8") as f:
+        with open(FileStorage._FileStorage__file_path, "r", encoding="utf-8") as f:
             self.assertEqual(len(f.read()), len(json.dumps(d)))
             f.seek(0)
             self.assertEqual(json.load(f), d)

@@ -147,8 +147,7 @@ class TestBaseModel(unittest.TestCase):
         """Tests instantiation with **kwargs from custom dict."""
         d = {
             "__class__": "BaseModel",
-            "updated_at": datetime(2050, 12, 30, 23, 59, 59,
-                                   123456).isoformat(),
+            "updated_at": datetime(2050, 12, 30, 23, 59, 59, 123456).isoformat(),
             "created_at": datetime.now().isoformat(),
             "id": uuid.uuid4(),
             "var": "foobar",
@@ -166,8 +165,7 @@ class TestBaseModel(unittest.TestCase):
         key = "{}.{}".format(type(b).__name__, b.id)
         d = {key: b.to_dict()}
         self.assertTrue(os.path.isfile(FileStorage._FileStorage__file_path))
-        with open(FileStorage._FileStorage__file_path,
-                  "r", encoding="utf-8") as f:
+        with open(FileStorage._FileStorage__file_path, "r", encoding="utf-8") as f:
             self.assertEqual(len(f.read()), len(json.dumps(d)))
             f.seek(0)
             self.assertEqual(json.load(f), d)
