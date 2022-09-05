@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module for BaseModel class 
+"""Module for BaseModel class
    that defines all common attributes/methods
    for other classes
  """
@@ -33,7 +33,8 @@ class BaseModel:
         """Return a human-readable
         string representation of an instance
         """
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".\
+               format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Update the updated_at attribute
