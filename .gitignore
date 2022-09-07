@@ -5,3 +5,4 @@ file.json
 
 # OS metadata files
 .DS_Store
+.idea
