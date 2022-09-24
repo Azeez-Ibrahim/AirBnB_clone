@@ -132,27 +132,31 @@ class HBNBCommand(cmd.Cmd):
                     attr = args[2]
                     value = args[3].strip('"')
                     if hasattr(all_instances[class_instance], attr):
-                        attr_type = type(getattr(all_instances[class_instance], attr))
+                        attr_type = type(getattr(all_instances[class_instance],
+                                                 attr))
                         if attr_type == int:
-                            setattr(all_instances[class_instance], attr, int(value))
+                            setattr(all_instances[class_instance],
+                                    attr, int(value))
                         elif attr_type == float:
-                            setattr(all_instances[class_instance], attr, float(value))
+                            setattr(all_instances[class_instance],
+                                    attr, float(value))
                         elif attr_type == str:
                             setattr(all_instances[class_instance], attr, value)
                         storage.save()
                     else:
                         if value.isnumeric():
-                            setattr(all_instances[class_instance], attr, int(value))
+                            setattr(all_instances[class_instance],
+                                    attr, int(value))
                         else:
                             setattr(all_instances[class_instance], attr, value)
                         storage.save()
 
     def default(self, args):
-        """ Methods with User.
+        """Methods with User.
         Args:
             args (str): Arguments passed
         """
-        args_list = args.split('.')
+        args_list = args.split(".")
         if args_list[0] not in self.classes or len(args_list) != 2:
             super().default(args)
         else:
@@ -162,60 +166,65 @@ class HBNBCommand(cmd.Cmd):
                 print(self.count_method(args_list[0]))
             elif args_list[1][:4] == "show":
                 tmp = args_list[1].split('"')
-                self.do_show(args_list[0] + ' ' + tmp[1])
+                self.do_show(args_list[0] + " " + tmp[1])
             elif args_list[1][:7] == "destroy":
                 tmp = args_list[1].split('"')
-                self.do_destroy(args_list[0] + ' ' + tmp[1])
+                self.do_destroy(args_list[0] + " " + tmp[1])
             elif args_list[1][:6] == "update":
-                if '{' not in args_list[1]:
+                if "{" not in args_list[1]:
                     tmp = args_list[1].split('"')
                 else:
-                    tmp = args_list[1].split('{')
-                if len(tmp) == 7 and '{' not in tmp[2]:
-                    self.do_update(args_list[0] + ' ' + tmp[1] + ' ' + tmp[3]
-                                   + ' ' + tmp[5])
+                    tmp = args_list[1].split("{")
+                if len(tmp) == 7 and "{" not in tmp[2]:
+                    self.do_update(
+                        args_list[0] + " " + tmp[1] +
+                        " " + tmp[3] + " " + tmp[5]
+                    )
                 elif len(tmp) == 5:
-                    self.do_update(args_list[0] + ' ' + tmp[1] + ' ' + tmp[3] +
-                                   ' ' + tmp[4][1:-1])
+                    self.do_update(
+                        args_list[0] + " " + tmp[1] +
+                        " " + tmp[3] + " " + tmp[4][1:-1]
+                    )
                 else:
-                    self.update_dict(args_list[0] + ' ' + tmp[0][8:-3],
-                                     "{'" + tmp[1][1:-1])
+                    self.update_dict(
+                        args_list[0] + " " + tmp[0][8:-3],
+                        "{'" + tmp[1][1:-1]
+                    )
 
     @classmethod
     def all_method(cls, class_name):
-        """ Print all instances 'class name' """
+        """Print all instances 'class name'"""
         all_instances = storage.all()
         number = cls.count_method(class_name)
         count = 0
-        print("[", end='')
+        print("[", end="")
         for key in all_instances:
-            if class_name == key.split('.')[0]:
-                print(all_instances[key], end='')
+            if class_name == key.split(".")[0]:
+                print(all_instances[key], end="")
                 if count != number - 1:
-                    print(", ", end='')
+                    print(", ", end="")
                     count += 1
         print("]")
 
     def update_dict(self, class_id, attr_dict):
-        """ Update Object using Dictionary.
+        """Update Object using Dictionary.
         Args:
             class_id (str) : Class name and unique ID
             attr_dict (str): Dictionary containing  the attributes
         """
         tmp_dict = eval(attr_dict)
         for key, value in tmp_dict.items():
-            self.do_update(class_id + ' ' + key + ' ' + str(value))
+            self.do_update(class_id + " " + key + " " + str(value))
 
     @staticmethod
     def count_method(class_name):
-        """ Print the number of instances of a class """
+        """Print the number of instances of a class"""
         all_instances = storage.all()
         count = 0
         for key in all_instances:
-            if class_name == key.split('.')[0]:
+            if class_name == key.split(".")[0]:
                 count += 1
         return count
-
 
 
 if __name__ == "__main__":
