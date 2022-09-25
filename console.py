@@ -55,7 +55,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, args):
         "print string __str__ of an instance based on class name"
-        args = args.split()
         if not args:
             print("** class name missing **")
         else:
