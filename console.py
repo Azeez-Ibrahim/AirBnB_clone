@@ -57,9 +57,9 @@ class HBNBCommand(cmd.Cmd):
         "print string __str__ of an instance based on class name"
         args = args.split()
         "expecting: args = [name, name_id]"
-        if len(args) != 2:
+        if len(args) != 1:
             print("** class name missing **")
-        elif len(args) != 3:
+        elif len(args) != 2:
             print("** instance id missing **")
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
