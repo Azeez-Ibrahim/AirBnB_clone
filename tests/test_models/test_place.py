@@ -1,53 +1,36 @@
 #!/usr/bin/python3
-"""Unittest module for the Place Class."""
+""" Unittest for Place class.
 
+"""
 import unittest
-from datetime import datetime
-import time
 from models.place import Place
-import re
-import json
-from models.engine.file_storage import FileStorage
-import os
-from models import storage
-from models.base_model import BaseModel
 
 
 class TestPlace(unittest.TestCase):
+    """ Test cases for Place class.
 
-    """Test Cases for the Place class."""
+    """
 
-    def setUp(self):
-        """Sets up test methods."""
-        pass
+    @classmethod
+    def setUpClass(cls):
+        """ Setup Test Examples """
+        cls.model1 = Place()
 
-    def tearDown(self):
-        """Tears down test methods."""
-        self.resetStorage()
-        pass
+    def test_attr(self):
+        """ Test for attributes """
+        self.assertEqual(type(self.model1.city_id), str)
+        self.assertEqual(type(self.model1.user_id), str)
+        self.assertEqual(type(self.model1.name), str)
+        self.assertEqual(type(self.model1.description), str)
+        self.assertEqual(type(self.model1.number_rooms), int)
+        self.assertEqual(type(self.model1.number_bathrooms), int)
+        self.assertEqual(type(self.model1.max_guest), int)
+        self.assertEqual(type(self.model1.price_by_night), int)
+        self.assertEqual(type(self.model1.latitude), float)
+        self.assertEqual(type(self.model1.longitude), float)
+        self.assertEqual(type(self.model1.amenity_ids), list)
 
-    def resetStorage(self):
-        """Resets FileStorage data."""
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
-
-    def test_8_instantiation(self):
-        """Tests instantiation of Place class."""
-
-        b = Place()
-        self.assertEqual(str(type(b)), "<class 'models.place.Place'>")
-        self.assertIsInstance(b, Place)
-        self.assertTrue(issubclass(type(b), BaseModel))
-
-    def test_8_attributes(self):
-        """Tests the attributes of Place class."""
-        attributes = storage.attributes()["Place"]
-        o = Place()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
-
-
-if __name__ == "__main__":
-    unittest.main()
+    @classmethod
+    def tearDownClass(cls):
+        """ Destroy Test Examples """
+        del cls.model1
